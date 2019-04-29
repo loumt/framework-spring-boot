@@ -3,6 +3,7 @@ package com.boot.controller;
 import com.boot.base.BaseController;
 import com.boot.enums.ResultCode;
 import com.boot.pojo.User;
+import com.boot.services.TaskService;
 import com.boot.services.UserService;
 import com.boot.utils.PageModel;
 import com.boot.utils.PageResultModel;
@@ -22,6 +23,9 @@ public class UserController extends BaseController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TaskService taskService;
 
     @ApiOperation(value = "注册", notes = "用户通过此接口注册", responseContainer = "Map", httpMethod = "POST")
     @ApiImplicitParam(name = "user", value = "用户详细实体", required = true, dataType = "User")
@@ -58,6 +62,17 @@ public class UserController extends BaseController {
     @ApiImplicitParam(name = "id", value = "用户Id", required = true, dataType = "String")
     public Map<String, Object> delUser(@PathVariable String id) {
         userService.deleteUser(id);
+        return super.isCommonSuccess();
+    }
+
+    @GetMapping(value= "/task")
+    public Map<String, Object> task(@PathVariable Integer count) {
+
+        for(int i=0;i <= count; i ++){
+            taskService.executorTask1(i);
+            taskService.executorTask2(i);
+        }
+
         return super.isCommonSuccess();
     }
 

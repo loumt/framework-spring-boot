@@ -2,15 +2,14 @@ package com.boot.aop;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.InetAddress;
 import java.util.Arrays;
 
 @Aspect
@@ -32,6 +31,33 @@ public class HttpRequestAspect {
         log.info("IP : " + request.getRemoteAddr());
         log.info("CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
         log.info("ARGS : " + Arrays.toString(joinPoint.getArgs()));
+    }
+
+    @Around("pointCut()")
+    public Object logAll(ProceedingJoinPoint joinPoint){
+        Object result = null;
+        // 执行方法名
+        String methodName = joinPoint.getSignature().getName();
+        String className = joinPoint.getTarget().getClass().getSimpleName();
+        Long start = 0L;
+        Long end = 0L;
+        String ip = null;
+        // 当前用户
+        try {
+            // 执行方法所消耗的时间
+            start = System.currentTimeMillis();
+            result = joinPoint.proceed();
+            end = System.currentTimeMillis();
+            // ip
+            ip = InetAddress.getLocalHost().getHostAddress();
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+        log.info("className:" + className);
+        log.info("methodName:" + methodName);
+        log.info("costTime:" + (end-start));
+        log.info("ip:" + ip);
+        return result;
     }
 
     @AfterReturning(returning = "ret", pointcut = "pointCut()")
