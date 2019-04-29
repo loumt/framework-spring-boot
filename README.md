@@ -24,4 +24,4 @@ createTime
 enable 是否可用
 ```
 
-![CircleCI Build Status](https://img.shields.io/badge/spring--boot-Template-red.svg)
+(https://img.shields.io/badge/spring--boot-Template-red.svg)
