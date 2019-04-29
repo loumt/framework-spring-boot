@@ -26,7 +26,5 @@ enable 是否可用
 
 https://img.shields.io/static/v1.svg?label=<LABEL>&message=<MESSAGE>&color=<COLOR>
   
-https://img.shields.io/badge/spring--boot-Template-green.svg
-
-https://img.shields.io/azure-devops/coverage/123/123/123.svg
+[!https://img.shields.io/badge/spring--boot-Template-green.svg]
 
