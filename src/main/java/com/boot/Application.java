@@ -9,6 +9,9 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
@@ -16,10 +19,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Slf4j
 @ServletComponentScan
 @EnableSwagger2
-@EnableAsync
+//@EnableAsync
 @EnableScheduling
 public class Application {
-
 
     public static void main(String[] args) {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(Application.class, args);

@@ -58,5 +58,11 @@ public class Test {
 
         map.forEach((k,v)-> System.out.println("Key:" + k + " ~" + "Value:" + v) );
 
+        int max = Math.max(105, 100);
+        System.out.println(max);
+
+        int i = 3 << 2;
+        System.out.println(i);
+
     }
 }
